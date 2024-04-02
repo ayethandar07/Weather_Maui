@@ -10,6 +10,6 @@ namespace WeatherApp_Maui
     {
         public static string OpenWeatherMapEndpoint = "https://api.openweathermap.org/data/2.5/weather";
 
-        public static string OpenWeatherMapAPIKey = "e54d700489aa0cdc4399a2def608eb7b";
+        public static string OpenWeatherMapAPIKey = "your open weather api key";
     }
 }
