@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="WeatherApp_Maui.MainPage"
              xmlns:local="clr-namespace:WeatherApp_Maui"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              BackgroundColor="{DynamicResource Secondary}">
 
     <ContentPage.Resources>
@@ -19,6 +20,7 @@
 
             <local:LongToDateTimeConverter x:Key="longToDatetimeConverter" />
             <local:FahrenheitToCelciusConverter x:Key="fahrenheitToCelciusConverter" />
+            <local:DateTimeToStringConverter x:Key="dateTimeToStringConverter" />
             
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -90,7 +92,7 @@
             <Label
                 FontSize="12"
                 HorizontalOptions="Center"
-                Text="April 2, 12:00AM"
+                Text="{Binding Source={x:Static sys:DateTime.Now}, Converter={StaticResource dateTimeToStringConverter}}"
                 TextColor="White"/>
         </StackLayout>
 

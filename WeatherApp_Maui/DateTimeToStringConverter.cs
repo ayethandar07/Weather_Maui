@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 
 namespace WeatherApp_Maui
 {
-    public class LongToDateTimeConverter : IValueConverter
+    public class DateTimeToStringConverter : IValueConverter
     {
-        DateTime _time = new DateTime(1970,1,1,0,0,0,0);
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            long dateTime = (long)value;
+            if(value is DateTime dateTime)
+            {
+                return dateTime.ToString("MMMM d, hh:mmtt");
+            }
 
-            string time = _time.AddSeconds(dateTime).ToString();
-
-            return $"{time} UTC";
+            return value.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
