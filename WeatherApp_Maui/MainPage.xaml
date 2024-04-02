@@ -15,7 +15,11 @@
             <Style x:Key="labelResultStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="Medium"/>
                 <Setter Property="Margin" Value="10,0,0,0"/>
-            </Style>                    
+            </Style>
+
+            <local:LongToDateTimeConverter x:Key="longToDatetimeConverter" />
+            <local:FahrenheitToCelciusConverter x:Key="fahrenheitToCelciusConverter" />
+            
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -41,11 +45,18 @@
             Orientation="Vertical" 
             Spacing="20" 
             VerticalOptions="Start">
-            <Label 
-                FontSize="16" 
-                Text="Karachi"
-                TextColor="White"
-                VerticalOptions="Center"/>
+            <StackLayout Orientation="Horizontal">
+                <Label 
+                    FontSize="16" 
+                    Text="{Binding Title}"
+                    TextColor="White"
+                    VerticalOptions="Center"/>      
+                <Label
+                    FontSize="16"
+                    Text="{Binding Sys.Country, StringFormat=' , {0}'}"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+            </StackLayout>            
         </StackLayout>
 
         <StackLayout
@@ -62,7 +73,7 @@
                 <Label
                     FontAttributes="Bold"
                     FontSize="70"
-                    Text="12"
+                    Text="{Binding Main.Temperature, Converter={StaticResource fahrenheitToCelciusConverter}}"
                     TextColor="White"
                     VerticalOptions="Center"/>
                 <Label
@@ -74,7 +85,7 @@
             <Label
                 FontSize="16"
                 HorizontalOptions="Center"
-                Text="rain"
+                Text="{Binding Weather[0].Description}"
                 TextColor="White"/>
             <Label
                 FontSize="12"
@@ -113,7 +124,8 @@
                          FontAttributes="Bold" 
                          FontSize="14" 
                          HorizontalOptions="Center"
-                         Text="50%"/>
+                         Text="{Binding Main.Humidity}"
+                         TextColor="Black"/>
                          <Label  
                              FontSize="11" 
                              HorizontalOptions="Center"
@@ -133,7 +145,7 @@
                            FontAttributes="Bold" 
                            FontSize="14" 
                            HorizontalOptions="Center"
-                           Text="2.6 m/s"
+                           Text="{Binding Wind.Speed}"
                            TextColor="Black"/>
                         <Label  
                            FontSize="11" 
@@ -154,7 +166,7 @@
                              FontAttributes="Bold" 
                              FontSize="14" 
                              HorizontalOptions="Center"
-                             Text="1011 hpa"
+                             Text="{Binding Main.Pressure}"
                              TextColor="Black"/>                
                         <Label  
                              FontSize="11" 
@@ -175,7 +187,7 @@
                              FontAttributes="Bold" 
                              FontSize="14" 
                              HorizontalOptions="Center"
-                             Text="10%"
+                             Text="{Binding Clouds.All}"
                              TextColor="Black"/>
                         <Label  
                              FontSize="11" 
@@ -201,7 +213,7 @@
                     VerticalOptions="Center"/>
                 <Label
                     FontSize="15"
-                    Text="12:00:00 AM"
+                    Text="{Binding Sys.Sunrise, Converter={StaticResource longToDatetimeConverter}}"
                     TextColor="Black"
                     VerticalOptions="Center"/>
             </StackLayout>
@@ -214,13 +226,13 @@
                      VerticalOptions="Center"/>
                 <Label
                      FontSize="15"
-                     Text="12:00:00 AM"
+                     Text="{Binding Sys.Sunset, Converter={StaticResource longToDatetimeConverter}}"
                      TextColor="Black"
                      VerticalOptions="Center"/>
             </StackLayout>
         </StackLayout>
 
-        <StackLayout 
+        <StackLayout
             Grid.Row="3"
             Margin="0,40,0,0"
             Orientation="Horizontal">
@@ -230,18 +242,18 @@
                 BackgroundColor="#7c58c9"
                 CharacterSpacing="7"
                 HorizontalTextAlignment="Center"
-                Text="Karachi"
+                Text="{Binding Title}"
                 TextColor="White"
                 VerticalOptions="Center"
-                WidthRequest="250"/>
+                WidthRequest="250" />
             <Button
                 BackgroundColor="#7c58c9"
                 BorderColor="White"
                 BorderWidth="1"
                 Clicked="OnGetWeatherButtonClicked"
                 Text="Get Weather"
-                TextColor="White"/>
+                TextColor="White" />
         </StackLayout>
-        
+
     </Grid>
 </ContentPage>
